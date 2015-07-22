@@ -1,0 +1,12 @@
+<h1>My Songs</h1>
+
+
+<% @songs.each do |song| %>
+<%= link_to song.title, song_path(song.id) %>
+    <%= link_to "Edit", edit_song_path(song.id)%>
+    <%= link_to "Delete", song_path(song.id), method: :delete, data: { confirm: "Are you sure?"}%>
+    <br>
+    <%#= link_to song.title, song %> <br>
+<% end %>
+
+<%= link_to "New Song", new_song_path%>
