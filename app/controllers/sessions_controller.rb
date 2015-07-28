@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       flash[:notice] = "Welcome, #{user.username}"
-      redirect_to root_path
+      redirect_to user
     else
       flash.now[:notice] = "That Homey don't live here yo!"
       render :new
