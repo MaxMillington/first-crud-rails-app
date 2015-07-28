@@ -4,6 +4,7 @@ class SongsController < ApplicationController
 
   def index
     @songs = Song.all
+    session[:most_recent_song_title] = @songs.last.title
   end
 
   def show
@@ -16,8 +17,11 @@ class SongsController < ApplicationController
   def create
     @song = Song.new(song_params)
     if @song.save
+      # @song.save
+      flash[:alert] = "#{@song.title} has been created"
       redirect_to song_path(@song.id)
     else
+      flash[:notice] = "Song cannot be created without a title."
       render :new
     end
   end
