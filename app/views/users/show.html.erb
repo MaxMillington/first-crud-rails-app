@@ -1,11 +1,19 @@
-<h1>User:</h1>
+<h1>User: <%= @user.username %></h1>
 
-<p><%= @user.username %></p>
+<h3><%= "#{@user.username}'s Jams:" %></h3>
 
 <body>
-<%= @user.songs %>
+<% current_user.songs.each do |song| %>
+    <%= link_to song.title, song_path(song.id) %>
+    <%= link_to "Edit", edit_song_path(song.id)%>
+    <%= link_to "Delete", song_path(song.id), method: :delete, data: { confirm: "Are you sure?"}%>
+    <br>
+    <%#= link_to song.title, song %> <br>
+<% end %>
 </body>
 
 <div>
+  <br>
+  <%= link_to "New Song", new_song_path%><br>
   <%= link_to "Songs", songs_path %>
 </div>
